@@ -3,6 +3,7 @@ node_modules/
 dist/
 yarn.lock
 package-lock.json
+/sanity
 npm-debug.*
 *.jks
 *.p8
