@@ -97,14 +97,14 @@ const Home = () => {
           <Categories />
           {featuredCategories &&
             featuredCategories.map((category: FeaturedProps) => {
-              <>
+              return (
                 <FeaturedRow
                   key={category._id}
                   id={category._id}
                   title={category.name}
                   description={category.short_description}
                 />
-              </>;
+              );
             })}
         </>
       </ScrollView>

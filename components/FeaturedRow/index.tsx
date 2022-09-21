@@ -1,7 +1,8 @@
 import { ArrowRight } from "phosphor-react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, ScrollView } from "react-native";
 import { RestaurantCard } from "../RestaurantCard";
+import sanityClient from "../../sanity";
 
 interface FeaturedProps {
   id: string;
@@ -9,7 +10,44 @@ interface FeaturedProps {
   description: string;
 }
 
+interface RestaurantCardProps {
+  _id: number;
+  image: string;
+  address: string;
+  name: string;
+  rating: number;
+  short_description: string;
+  dishes: [];
+  genre: string;
+  long: number;
+  lat: number;
+}
+
 const FeaturedRow = ({ id, title, description }: FeaturedProps) => {
+  const [restaurants, setRestaurants] = useState<RestaurantCardProps[]>([]);
+
+  useEffect(() => {
+    sanityClient
+      .fetch(
+        `
+    *[_type == 'featured' && _id == $id] {
+      ...,
+      restaurants[]->{
+        ...,
+        dishes[]->,
+        type -> {
+          name
+        }
+      }
+    }[0]
+    `,
+        { id }
+      )
+      .then((data: any) => {
+        setRestaurants(data?.restaurants);
+      });
+  }, []);
+
   return (
     <View>
       <View className="mt-4 flex-row items-center justify-between px-4">
@@ -27,18 +65,27 @@ const FeaturedRow = ({ id, title, description }: FeaturedProps) => {
         showsHorizontalScrollIndicator={false}
         className="pt-4"
       >
-        <RestaurantCard
-          id={123}
-          bannerUrl="https://links.papareact.com/gn7"
-          title="Yo! Sushi"
-          rating={4.7}
-          genre="Japonese"
-          address="123 Main St"
-          short_description="This is a Test description"
-          dishers={[]}
-          long={20}
-          lat={0}
-        />
+        {restaurants ? (
+          restaurants.map((restaurant: RestaurantCardProps) => {
+            return (
+              <RestaurantCard
+              key={restaurant._id}
+                id={restaurant._id}
+                bannerUrl={restaurant.image}
+                title={restaurant.name}
+                rating={restaurant.rating}
+                genre={restaurant.genre}
+                address={restaurant.address}
+                short_description={restaurant.short_description}
+                dishes={restaurant.dishes}
+                long={restaurant.long}
+                lat={restaurant.lat}
+              />
+            );
+          })
+        ) : (
+          <Text> Sem dados</Text>
+        )}
       </ScrollView>
     </View>
   );
