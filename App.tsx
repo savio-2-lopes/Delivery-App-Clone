@@ -7,31 +7,50 @@ import { Provider } from "react-redux";
 import { store } from "./store";
 import Basket from "./screens/Basket";
 
-const Stack = createNativeStackNavigator();
-
-interface RestaurantScreenProps {
-  id: number;
-  bannerUrl: string;
-  title: string;
-  rating: number;
-  genre: string;
-  address: string;
-  short_description: string;
-  dishes: [];
-  long: number;
-  lat: number;
-}
+import {
+  useFonts,
+  Inter_400Regular,
+  Inter_500Medium,
+  Inter_700Bold,
+} from "@expo-google-fonts/inter";
+import { ActivityIndicator } from "react-native";
+import LoadingOrder from "./screens/LoadingOrder";
+import Delivery from "./screens/Delivery";
+import Login from "./screens/Login";
+import { createStackNavigator } from '@react-navigation/stack';
 
 export default function App() {
+  const Stack = createStackNavigator();
+  const [fontsLoaded] = useFonts({
+    Inter_400Regular,
+    Inter_500Medium,
+    Inter_700Bold,
+  });
+
+  if (!fontsLoaded) {
+    return <ActivityIndicator size={50} color="#3ebd71" />;
+  }
+
   return (
     <NavigationContainer>
       <Provider store={store}>
         <Stack.Navigator>
+          <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Restaurant" component={Restaurant} />
           <Stack.Screen
             name="Basket"
             component={Basket}
+            options={{ presentation: "modal", headerShown: false }}
+          />
+          <Stack.Screen
+            name="LoadingOrder"
+            component={LoadingOrder}
+            options={{ presentation: "modal", headerShown: false }}
+          />
+          <Stack.Screen
+            name="Delivery"
+            component={Delivery}
             options={{ presentation: "modal", headerShown: false }}
           />
         </Stack.Navigator>

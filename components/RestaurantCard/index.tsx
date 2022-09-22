@@ -6,6 +6,7 @@ import { urlFor } from "../../sanity";
 interface RestaurantCard {
   id: number;
   bannerUrl: string;
+  token: string;
   title: string;
   rating: number;
   genre: string;
@@ -20,6 +21,7 @@ export function RestaurantCard({
   id,
   bannerUrl,
   title,
+  token,
   rating,
   genre,
   address,
@@ -35,6 +37,7 @@ export function RestaurantCard({
       onPress={() => {
         navigation.navigate("Restaurant", {
           id,
+          token,
           bannerUrl,
           title,
           rating,

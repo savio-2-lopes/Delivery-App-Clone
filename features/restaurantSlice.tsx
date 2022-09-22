@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   restaurant: {
     id: null,
+    token: null,
     bannerUrl: null,
     title: null,
     rating: null,

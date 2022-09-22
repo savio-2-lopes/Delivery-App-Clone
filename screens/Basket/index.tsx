@@ -27,6 +27,10 @@ const Basket = () => {
   const dispatch = useDispatch();
   const basketTotal = useSelector(selectBasketTotal);
 
+  async function handleLoadingOrder() {
+    navigation.navigate("LoadingOrder");
+  }
+
   useEffect(() => {
     const groupedItems = items.reduce((results: any, item: any) => {
       (results[item.id] = results[item.id] || []).push(item);
@@ -36,7 +40,7 @@ const Basket = () => {
   }, [items]);
 
   return (
-    <SafeAreaView className="flex-1 bg-white">
+    <SafeAreaView className="flex-1 bg-white mt-4">
       <View className="flex-1 bg-gray-100">
         <View className="p-5 border-b border-[#00CCBB] bg-white shadow-xs">
           <View>
@@ -80,7 +84,7 @@ const Basket = () => {
               />
               <Text className="flex-1">{items[0]?.name}</Text>
               <Text className="text-gray-600">
-                <Currency quantity={items[0]?.name} currency="BRL" />
+                <Currency quantity={items[0]?.price} currency="BRL" />
               </Text>
 
               <TouchableOpacity>
@@ -117,7 +121,10 @@ const Basket = () => {
             </Text>
           </View>
 
-          <TouchableOpacity className="rounded-lg bg-[#00CCbb] p-4">
+          <TouchableOpacity
+            onPress={handleLoadingOrder}
+            className="rounded-lg bg-[#00CCbb] p-4"
+          >
             <Text className="text-center text-white text-lg font-bold">
               Place Order
             </Text>

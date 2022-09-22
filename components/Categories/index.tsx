@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { View, Text, ScrollView } from "react-native";
+import { View, Text, ScrollView, ActivityIndicator } from "react-native";
 import CategoriesCard from "../CategoriesCard";
 import sanityClient from "../../sanity";
 import { urlFor } from "../../sanity";
@@ -43,7 +43,7 @@ const Categories = () => {
           />
         ))
       ) : (
-        <Text>Sem dados</Text>
+        <ActivityIndicator size={50} color="#3ebd71"  />
       )}
     </ScrollView>
   );

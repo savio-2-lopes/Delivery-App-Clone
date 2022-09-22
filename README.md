@@ -5,6 +5,8 @@
 ![GitHub top language](https://img.shields.io/github/languages/top/savio-2-lopes/Delivery-App-Clone)
 ![GitHub followers](https://img.shields.io/github/followers/savio-2-lopes?label=Follow&style=social)
 
+3:17:04
+
 <br>
 
 ## Tópicos

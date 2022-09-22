@@ -34,6 +34,7 @@ const Restaurant = () => {
     params: {
       id,
       bannerUrl,
+      token,
       title,
       rating,
       genre,
@@ -51,6 +52,7 @@ const Restaurant = () => {
         id,
         bannerUrl,
         title,
+        token,
         rating,
         genre,
         address,
@@ -83,7 +85,7 @@ const Restaurant = () => {
             onPress={navigation.goBack}
             className="absolute top-14 left-5 p-2 bg-gray-100 rounded-full"
           >
-            <CaretLeft size={20} color="#00CCBB" />
+            <CaretLeft size={20} color="#3ebd71" />
           </TouchableOpacity>
         </View>
 
@@ -119,7 +121,7 @@ const Restaurant = () => {
             <Text className="pl-2 flex-1 text-md font-bold text-gray-400">
               Have a food allergy?
             </Text>
-            <CaretRight color="#00CCBB" />
+            <CaretRight color="#3ebd71" />
           </TouchableOpacity>
         </View>
 
@@ -128,6 +130,7 @@ const Restaurant = () => {
           {dishes.map((dish: any) => (
             <DishRow
               key={dish._id}
+              token={token}
               id={dish._id}
               name={dish.name}
               description={dish.short_description}

@@ -1,12 +1,19 @@
 import { ArrowRight } from "phosphor-react-native";
 import React, { useEffect, useState } from "react";
-import { View, Text, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  ScrollView,
+  ActivityIndicator,
+  SafeAreaView,
+} from "react-native";
 import { RestaurantCard } from "../RestaurantCard";
 import sanityClient from "../../sanity";
 
 interface FeaturedProps {
   id: string;
   title: string;
+  token: string;
   description: string;
 }
 
@@ -23,7 +30,7 @@ interface RestaurantCardProps {
   lat: number;
 }
 
-const FeaturedRow = ({ id, title, description }: FeaturedProps) => {
+const FeaturedRow = ({ id, token, title, description }: FeaturedProps) => {
   const [restaurants, setRestaurants] = useState<RestaurantCardProps[]>([]);
 
   useEffect(() => {
@@ -49,10 +56,10 @@ const FeaturedRow = ({ id, title, description }: FeaturedProps) => {
   }, []);
 
   return (
-    <View>
+    <SafeAreaView className="flex">
       <View className="mt-4 flex-row items-center justify-between px-4">
         <Text className="font-bold text-lg">{title}</Text>
-        <ArrowRight color="#00CCBB" />
+        <ArrowRight color="#3ebd71" />
       </View>
 
       <Text className="text-xs text-gray-500 px-4">{description}</Text>
@@ -69,8 +76,9 @@ const FeaturedRow = ({ id, title, description }: FeaturedProps) => {
           restaurants.map((restaurant: RestaurantCardProps) => {
             return (
               <RestaurantCard
-              key={restaurant._id}
+                key={restaurant._id}
                 id={restaurant._id}
+                token={token}
                 bannerUrl={restaurant.image}
                 title={restaurant.name}
                 rating={restaurant.rating}
@@ -84,10 +92,10 @@ const FeaturedRow = ({ id, title, description }: FeaturedProps) => {
             );
           })
         ) : (
-          <Text> Sem dados</Text>
+          <ActivityIndicator size={50} color="#3ebd71" />
         )}
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 

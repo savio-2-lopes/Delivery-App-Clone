@@ -5,6 +5,7 @@ yarn.lock
 package-lock.json
 /sanity
 npm-debug.*
+.env
 *.jks
 *.p8
 *.p12

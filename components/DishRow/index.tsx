@@ -13,13 +13,14 @@ import {
 
 interface DishRow {
   id: string;
+  token: string;
   name: string;
   description: string;
   price: string;
   image: string;
 }
 
-const DishRow = ({ id, name, description, price, image }: DishRow) => {
+const DishRow = ({ id, token, name, description, price, image }: DishRow) => {
   const [isPressed, setIsPressed] = useState(false);
   const items = useSelector((state) => selectBasketItemsWithId(state, id));
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ const DishRow = ({ id, name, description, price, image }: DishRow) => {
       addToBasket({
         id,
         name,
+        token,
         description,
         price,
         image,
@@ -76,7 +78,7 @@ const DishRow = ({ id, name, description, price, image }: DishRow) => {
             <TouchableOpacity onPress={removeItemFromBasket}>
               <MinusCircle
                 weight="fill"
-                color={items.length > 0 ? "#00CCBB" : "gray"}
+                color={items.length > 0 ? "#3ebd71" : "gray"}
                 size={40}
               />
             </TouchableOpacity>
@@ -84,7 +86,7 @@ const DishRow = ({ id, name, description, price, image }: DishRow) => {
             <Text>{items.length}</Text>
 
             <TouchableOpacity onPress={addItemToBasket}>
-              <PlusCircle weight="fill" color="#00CCBB" size={40} />
+              <PlusCircle weight="fill" color="#3ebd71" size={40} />
             </TouchableOpacity>
           </View>
         </View>
