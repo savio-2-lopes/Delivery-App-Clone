@@ -1,4 +1,4 @@
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { X } from "phosphor-react-native";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -7,10 +7,10 @@ import { selectRestaurant } from "../../features/restaurantSlice";
 import * as Progress from "react-native-progress";
 import MapView, { Marker } from "react-native-maps";
 import React, { useEffect, useState } from "react";
+import { RootStackParamList } from "../../App";
+import { StackNavigationProp } from "@react-navigation/stack";
 
-type Params = {
-  token: string;
-};
+type homeScreenProp = StackNavigationProp<RootStackParamList, "Home">;
 
 type Profile = {
   email: string;
@@ -21,7 +21,7 @@ type Profile = {
 };
 
 const Delivery = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<homeScreenProp>();
   const restaurant = useSelector(selectRestaurant);
   const [profile, setProfile] = useState({} as Profile);
 
@@ -44,14 +44,14 @@ const Delivery = () => {
           <TouchableOpacity onPress={() => navigation.navigate("Home")}>
             <X color="white" weight="fill" size={40} />
           </TouchableOpacity>
-          <Text className="font-ligth text-white text-lg">Order Help</Text>
+          <Text className="font-ligth text-white text-lg">Ajuda no pedido</Text>
         </View>
 
         <View className="bg-white mx-5 my-2 rounded-md p-6 z-50 shadow-md">
           <View className="flex-row justify-between">
             <View>
-              <Text className="text-lg text-gray-400">Estimated Arrival</Text>
-              <Text className="text-3xl font-bold">45-55 Minutes</Text>
+              <Text className="text-lg text-gray-400">Chegada estimada</Text>
+              <Text className="text-3xl font-bold">35-45 Minutos</Text>
             </View>
 
             <Image
@@ -60,10 +60,10 @@ const Delivery = () => {
             />
           </View>
 
-          <Progress.Bar size={30} colo="#3ebd71" indeterminate={true} />
+          <Progress.Bar size={30} color="#3ebd71" indeterminate={true} />
 
           <Text className="mt-3 text-gray-500">
-            Your order at {restaurant.title} is being prepared
+            Seu pedido no {restaurant.title} está sendo preparada
           </Text>
         </View>
       </SafeAreaView>
@@ -97,9 +97,8 @@ const Delivery = () => {
         />
         <View className="flex-1">
           <Text className="text-lg">{profile.name}</Text>
-          <Text className="text-gray-400">Your Rider</Text>
         </View>
-        <Text className="text-[#3ebd71] text-lg mr-5 font-bold">Call</Text>
+        <Text className="text-[#3ebd71] text-lg mr-5 font-bold">Ligar</Text>
       </SafeAreaView>
     </View>
   );

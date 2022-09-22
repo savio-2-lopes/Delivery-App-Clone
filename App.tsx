@@ -17,10 +17,18 @@ import { ActivityIndicator } from "react-native";
 import LoadingOrder from "./screens/LoadingOrder";
 import Delivery from "./screens/Delivery";
 import Login from "./screens/Login";
-import { createStackNavigator } from '@react-navigation/stack';
+
+export type RootStackParamList = {
+  Login: undefined;
+  Home: undefined;
+  Restaurant: undefined;
+  Basket: undefined;
+  LoadingOrder: undefined;
+  Delivery: undefined;
+};
 
 export default function App() {
-  const Stack = createStackNavigator();
+  const Stack = createNativeStackNavigator<RootStackParamList>();
   const [fontsLoaded] = useFonts({
     Inter_400Regular,
     Inter_500Medium,

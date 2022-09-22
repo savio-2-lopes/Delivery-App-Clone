@@ -1,11 +1,15 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useEffect } from "react";
-import { View, Text, SafeAreaView } from "react-native";
+import { SafeAreaView } from "react-native";
 import * as Animatable from "react-native-animatable";
 import * as Progress from "react-native-progress";
+import { RootStackParamList } from "../../App";
+import { StackNavigationProp } from "@react-navigation/stack";
+
+type deliveryScreenProp = StackNavigationProp<RootStackParamList, "Delivery">;
 
 const LoadingOrder = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<deliveryScreenProp>();
   useEffect(() => {
     setTimeout(() => {
       navigation.navigate("Delivery");
@@ -25,7 +29,7 @@ const LoadingOrder = () => {
         iterationCount={1}
         className="break-words mt-10 mb-10 w-60 text-center text-lg text-white"
       >
-        Waiting for Restaurant to accept your order
+        Aguardando o restaurante aceitar seu pedido
       </Animatable.Text>
 
       <Progress.Circle size={60} indeterminate={true} color="white" />

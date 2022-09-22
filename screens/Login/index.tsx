@@ -9,7 +9,6 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import * as AuthSession from "expo-auth-session";
-import { GoogleLogo } from "phosphor-react-native";
 
 const { CLIENT_ID } = process.env;
 const { REDIRECT_URI } = process.env;
@@ -56,13 +55,13 @@ const Login = () => {
         {/* <a href="https://www.freepik.com/free-vector/healthy-food-concept-with-people-vegetables_24922282.htm#query=salad%20cartoon&position=10&from_view=keyword">Image by upklyak</a> on Freepik */}
 
         <View className="w-screen bg-[#3ebd71] p-5">
-          <Text className="font-bold text-5xl text-center text-white mt-5">
-            Don't Starve, Just Order
+          <Text className="font-bold text-4xl text-center text-white mt-2">
+            Buscando pratos vegetarianos?
           </Text>
 
           <View className="flex items-center justify-center">
             <Text className="break-words mt-5 w-60 text-center text-lg text-white">
-              Let vegetarian deliciousness twirl in your mounth.
+              Faça seu pedido de pratos vegetarianos próximos de sua localidade.
             </Text>
           </View>
 
@@ -73,7 +72,7 @@ const Login = () => {
           >
             <SimpleLineIcons name="social-google" size={34} color="#38b169" />
             <Text className="flex ml-3 text-[#38b169] text-lg">
-              Let's start with Google
+              Faça seu login com o Google
             </Text>
           </TouchableOpacity>
         </View>

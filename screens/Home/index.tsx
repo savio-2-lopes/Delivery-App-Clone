@@ -21,6 +21,10 @@ import {
 import Categories from "../../components/Categories";
 import FeaturedRow from "../../components/FeaturedRow";
 import sanityClient from "../../sanity";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "../../App";
+
+type homeScreenProp = StackNavigationProp<RootStackParamList, "Login">;
 
 type Params = {
   token: string;
@@ -41,7 +45,7 @@ interface FeaturedProps {
 }
 
 const Home = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<homeScreenProp>();
   const route = useRoute();
   const [featuredCategories, setFeaturedCategories] = useState([]);
   const [profile, setProfile] = useState({} as Profile);
@@ -71,7 +75,6 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    // loadProfile();
     sanityClient
       .fetch(
         `
@@ -98,9 +101,11 @@ const Home = () => {
           className="h-7 w-7 bg-gray-300 p-4 rounded-full"
         />
         <View className="flex-1">
-          <Text className="font-bold text-gray-400 text-xs">Deliver Now</Text>
+          <Text className="font-bold text-gray-400 text-xs">
+            Entrega rápida
+          </Text>
           <Text className="font-bold text-xl">
-            Current Location
+            Localização atual
             <CaretDown size={20} color="#3ebd71" />
           </Text>
         </View>
@@ -178,6 +183,7 @@ const Home = () => {
       </View>
 
       {/* Conteúdo */}
+
       <ScrollView
         className="bg-gray-100"
         contentContainerStyle={{

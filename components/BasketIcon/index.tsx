@@ -8,10 +8,14 @@ import {
   selectBasketTotal,
 } from "../../features/basketSlice";
 import Currency from "react-currency-formatter";
+import { RootStackParamList } from "../../App";
+import { StackNavigationProp } from "@react-navigation/stack";
+
+type BasketScreenProp = StackNavigationProp<RootStackParamList, "Basket">;
 
 const BasketIcon = () => {
   const items = useSelector(selectBasketItems);
-  const navigation = useNavigation();
+  const navigation = useNavigation<BasketScreenProp>();
   const basketTotal = useSelector(selectBasketTotal);
 
   if (items.length === 0) return null;
@@ -26,7 +30,7 @@ const BasketIcon = () => {
           {items.length}
         </Text>
         <Text className="flex-1 text-white font-extrabold text-lg text-center">
-          Visualizar Carrinho de Compras
+          Carrinho de Compras
         </Text>
         <Text className="text-lg text-white font-extrabold">
           <Currency quantity={basketTotal} currency="BRL" />

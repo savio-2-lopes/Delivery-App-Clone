@@ -31,7 +31,7 @@ export function RestaurantCard({
   lat,
 }: RestaurantCard) {
   const navigation = useNavigation();
-  
+
   return (
     <TouchableOpacity
       onPress={() => {
@@ -74,7 +74,7 @@ export function RestaurantCard({
 
         <View className="flex-row items-center mt-2 space-x-1">
           <MapPin style={{ opacity: 0.5 }} color="gray" size={22} />
-          <Text className="text-xs text-gray-500">Nearby · {address}</Text>
+          <Text className="text-xs text-gray-500">Próximo · {address}</Text>
         </View>
       </View>
     </TouchableOpacity>

@@ -12,20 +12,24 @@ import BasketIcon from "../../components/BasketIcon";
 import DishRow from "../../components/DishRow";
 import { setRestaurant } from "../../features/restaurantSlice";
 import { urlFor } from "../../sanity";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
-interface RestaurantScreenProps {
-  id: number;
-  bannerUrl: string;
-  title: string;
-  rating: number;
-  genre: string;
-  address: string;
-  short_description: string;
-  dishes: [];
-  long: number;
-  lat: number;
-}
+type AuthResponse = {
+  params: {
+    id: string;
+    key?: string;
+    bannerUrl: string;
+    token: string;
+    title: string;
+    rating: string;
+    genre: string;
+    address: string;
+    short_description: string;
+    dishes: [];
+    long: number;
+    lat: number;
+  };
+};
 
 const Restaurant = () => {
   const navigation = useNavigation();
@@ -108,7 +112,7 @@ const Restaurant = () => {
               <View className="flex-row items-center space-x-1">
                 <MapPin style={{ opacity: 0.5 }} color="gray" size={22} />
                 <Text className="text-xs text-gray-400">
-                  Nearby · {address}
+                  Próximo · {address}
                 </Text>
               </View>
             </View>
@@ -119,7 +123,7 @@ const Restaurant = () => {
           <TouchableOpacity className="flex-row items-center space-x-2 p-4 border-y border-gray-300">
             <Question color="gray" style={{ opacity: 0.5 }} size={20} />
             <Text className="pl-2 flex-1 text-md font-bold text-gray-400">
-              Have a food allergy?
+              Possui alergia alimentar?
             </Text>
             <CaretRight color="#3ebd71" />
           </TouchableOpacity>

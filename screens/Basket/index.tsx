@@ -15,12 +15,19 @@ import {
   selectBasketItems,
   selectBasketTotal,
 } from "../../features/basketSlice";
-import { X, XCircle } from "phosphor-react-native";
+import { XCircle } from "phosphor-react-native";
 import { urlFor } from "../../sanity";
 import Currency from "react-currency-formatter";
+import { RootStackParamList } from "../../App";
+import { StackNavigationProp } from "@react-navigation/stack";
+
+type LoadingOrderScreenProp = StackNavigationProp<
+  RootStackParamList,
+  "LoadingOrder"
+>;
 
 const Basket = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<LoadingOrderScreenProp>();
   const restaurant = useSelector(selectRestaurant);
   const items = useSelector(selectBasketItems);
   const [groupedItemsInBasket, setGroupedItemsInBasket] = useState([]);
@@ -44,7 +51,9 @@ const Basket = () => {
       <View className="flex-1 bg-gray-100">
         <View className="p-5 border-b border-[#00CCBB] bg-white shadow-xs">
           <View>
-            <Text className="text-lg font-bold text-center">Basket</Text>
+            <Text className="text-lg font-bold text-center">
+              Carrinho de Compras
+            </Text>
             <Text className="text-center text-gray-400">
               {restaurant.title}
             </Text>
@@ -92,7 +101,7 @@ const Basket = () => {
                   className="text-[#00ccbb] text-xs"
                   onPress={() => dispatch(removeFromBasket({ id: key }))}
                 >
-                  Remove
+                  Remover
                 </Text>
               </TouchableOpacity>
             </View>
@@ -108,14 +117,14 @@ const Basket = () => {
           </View>
 
           <View className="flex-row justify-between">
-            <Text className="text-gray-400">Delivery Free</Text>
+            <Text className="text-gray-400">Entrega gratuita</Text>
             <Text className="text-gray-400">
               <Currency quantity={5.99} currency="BRL" />
             </Text>
           </View>
 
           <View className="flex-row justify-between">
-            <Text>Order Total</Text>
+            <Text>Valor total</Text>
             <Text className="font-extrabold">
               <Currency quantity={basketTotal + 5.99} currency="BRL" />
             </Text>
@@ -126,7 +135,7 @@ const Basket = () => {
             className="rounded-lg bg-[#00CCbb] p-4"
           >
             <Text className="text-center text-white text-lg font-bold">
-              Place Order
+              Faça a sua encomenda
             </Text>
           </TouchableOpacity>
         </View>
