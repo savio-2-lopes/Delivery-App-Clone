@@ -5,7 +5,11 @@
 ![GitHub top language](https://img.shields.io/github/languages/top/savio-2-lopes/Delivery-App-Clone)
 ![GitHub followers](https://img.shields.io/github/followers/savio-2-lopes?label=Follow&style=social)
 
-3:17:04
+<br>
+
+<p align="center">
+  <img src="./.github/delivery-app.gif" width="100%" alt="Web">
+</p>
 
 <br>
 
@@ -17,7 +21,7 @@
 
 [Autor](#autor)
 
-[Agradecimentos](#agradecimentos)
+[Creditos de imagem](#creditos-de-imagem)
 
 <br>
 
@@ -31,8 +35,10 @@ Simples Aplicativo de Delivery desenvolvido em React Native e TailwindCSS
 
 Tecnologias e ferramentas utilizadas no desenvolvimento da Mobile:
 
-- [React Native](https://reactjs.org/)
-- [TailWindCSS]()
+- [React Native](https://reactnative.dev/)
+- [TailWindCSS](https://tailwindcss.com/)
+- [Sanity.io](https://www.sanity.io/)
+- [Redux](https://redux.js.org/)
 
 <br>
 
@@ -53,3 +59,23 @@ $ expo start
 [![Gmail Badge](https://img.shields.io/badge/-Gmail-c14438?style=flat&logo=gmail&logoColor=white)](mailto:savio.dev.lopes@gmail.com)
 
 Feito com ❤️ por [Savio Lopes](https://www.linkedin.com/in/savio-lopes/)
+
+<br>
+
+## Creditos de imagem
+
+As imagens que fazem representam os restaurante e pratos foram obtidas do site [pixabay](https://pixabay.com). Abaixo os créditos aos autores das imagens:
+
+[Silvia](https://pixabay.com/users/silviarita-3142410/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2756467) from Pixabay
+
+[Bernadette Wurzinger](https://pixabay.com/users/einladung_zum_essen-3625323/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1804457) from Pixabay
+
+[Stefan](https://pixabay.com/users/divily-110719/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2931846) from Pixabay
+
+[zuzana gazdikova](https://pixabay.com/users/zuzi99-7340598/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3010062) from Pixabay
+
+[congerdesign](https://pixabay.com/users/congerdesign-509903/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2972858) from Pixabay
+
+[Rita-👩‍🍳 und 📷 mit ❤](https://pixabay.com/users/ritae-19628/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3317060) from Pixabay
+
+[Keram Borz](https://pixabay.com/users/keram-257754/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=346985) from Pixabay
