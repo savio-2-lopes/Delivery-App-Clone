@@ -64,7 +64,7 @@ Feito com ❤️ por [Savio Lopes](https://www.linkedin.com/in/savio-lopes/)
 
 ## Creditos de imagem
 
-As imagens que fazem representam os restaurante e pratos foram obtidas do site [pixabay](https://pixabay.com). Abaixo os créditos aos autores das imagens:
+As imagens que representam os restaurante e pratos foram obtidas do site [pixabay](https://pixabay.com), que armazena imagens gratuitas. Abaixo os créditos aos autores das imagens:
 
 [Silvia](https://pixabay.com/users/silviarita-3142410/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=2756467) from Pixabay
 
