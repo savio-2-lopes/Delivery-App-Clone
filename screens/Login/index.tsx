@@ -9,6 +9,7 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import * as AuthSession from "expo-auth-session";
+import Svg, { Circle, Rect } from "react-native-svg";
 
 const { CLIENT_ID } = process.env;
 const { REDIRECT_URI } = process.env;
@@ -43,38 +44,42 @@ const Login = () => {
   }
 
   return (
-    <SafeAreaView className="bg-[#3ebd71] w-full h-full">
-      <View className="pb-3 mt-2 items-center mx-4 space-x-2">
-        <View className="bg-[#38b169] border-[#38b169] rounded-b-[120px]">
-          <Image
-            source={require("../../assets/home.png")}
-            style={{ width: 370, height: 370 }}
-          />
+    <SafeAreaView className="bg-[#3ebd71] h-full">
+      <View className="pb-3 items-center">
+        <View className="w-full">
+          <View className="bg-[#38b169] border-[#38b169] flex items-center rounded-b-[150px]">
+            <Image
+              source={require("../../assets/home.png")}
+              className="h-[340] w-[340]"
+            />
+          </View>
         </View>
 
         {/* <a href="https://www.freepik.com/free-vector/healthy-food-concept-with-people-vegetables_24922282.htm#query=salad%20cartoon&position=10&from_view=keyword">Image by upklyak</a> on Freepik */}
 
-        <View className="w-screen bg-[#3ebd71] p-5">
+        <View className="w-screen mt-10 bg-[#3ebd71]">
           <Text className="font-bold text-4xl text-center text-white mt-2">
             Buscando pratos vegetarianos?
           </Text>
 
           <View className="flex items-center justify-center">
-            <Text className="break-words mt-5 w-60 text-center text-lg text-white">
-              Faça seu pedido de pratos vegetarianos próximos de sua localidade.
+            <Text className="break-words mt-5 w-70 text-center text-lg text-white">
+              Faça seu pedido de pratos próximos de sua localidade.
             </Text>
           </View>
 
-          <TouchableOpacity
-            className="mt-8 h-[70] rounded-2xl bg-white flex-row justify-center items-center"
-            activeOpacity={0.7}
-            onPress={handleHome}
-          >
-            <SimpleLineIcons name="social-google" size={34} color="#38b169" />
-            <Text className="flex ml-3 text-[#38b169] text-lg">
-              Faça seu login com o Google
-            </Text>
-          </TouchableOpacity>
+          <View className="p-5 mt-2">
+            <TouchableOpacity
+              className="h-[70] w-full p-2 rounded-2xl bg-white flex-row justify-center items-center"
+              activeOpacity={0.7}
+              onPress={handleHome}
+            >
+              <SimpleLineIcons name="social-google" size={34} color="#38b169" />
+              <Text className="flex ml-3 text-[#38b169] text-lg">
+                Faça seu login com o Google
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </SafeAreaView>

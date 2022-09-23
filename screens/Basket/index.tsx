@@ -7,19 +7,19 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-import { selectRestaurant } from "../../features/restaurantSlice";
+import { selectRestaurant } from "../../store/restaurantSlice";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import {
   removeFromBasket,
   selectBasketItems,
   selectBasketTotal,
-} from "../../features/basketSlice";
+} from "../../store/basketSlice";
 import { XCircle } from "phosphor-react-native";
 import { urlFor } from "../../sanity";
 import Currency from "react-currency-formatter";
-import { RootStackParamList } from "../../App";
 import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "../../Routes";
 
 type LoadingOrderScreenProp = StackNavigationProp<
   RootStackParamList,
@@ -49,7 +49,7 @@ const Basket = () => {
   return (
     <SafeAreaView className="flex-1 bg-white mt-4">
       <View className="flex-1 bg-gray-100">
-        <View className="p-5 border-b border-[#00CCBB] bg-white shadow-xs">
+        <View className="p-5 border-b border-[#3ebd71] bg-white shadow-xs">
           <View>
             <Text className="text-lg font-bold text-center">
               Carrinho de Compras
@@ -63,20 +63,18 @@ const Basket = () => {
             onPress={navigation.goBack}
             className="rounded-full bg-gray-100 absolute top-3 right-5"
           >
-            <XCircle weight="fill" color="#00CCBB" size={50} />
+            <XCircle weight="fill" color="#3ebd71" size={50} />
           </TouchableOpacity>
         </View>
 
         <View className="flex-row items-center space-x-4 px-4 py-3 bg-white my-5">
           <Image
-            source={{
-              uri: "https://links.papareact.com/wru",
-            }}
+            source={require("../../assets/icon.png")}
             className="h-7 w-7 bg-gray-300 p-4 rounded-full"
           />
-          <Text className="flex-1">Deliver in 50-75 min</Text>
+          <Text className="flex-1">Entrega entre 50-75 min</Text>
           <TouchableOpacity>
-            <Text className="text-[#00CCBB]">Change</Text>
+            <Text className="text-[#3ebd71]">Atualizar</Text>
           </TouchableOpacity>
         </View>
 
@@ -86,7 +84,7 @@ const Basket = () => {
               key={key}
               className="flex-row items-center space-x-3 bg-white py-2 px-5"
             >
-              <Text className="text-[#00CCBB]">{items.length} x</Text>
+              <Text className="text-[#3ebd71]">{items.length} x</Text>
               <Image
                 source={{ uri: urlFor(items[0]?.image).url() }}
                 className="h-12 w-12 rounded-full"
@@ -98,7 +96,7 @@ const Basket = () => {
 
               <TouchableOpacity>
                 <Text
-                  className="text-[#00ccbb] text-xs"
+                  className="text-[#3ebd71] text-xs"
                   onPress={() => dispatch(removeFromBasket({ id: key }))}
                 >
                   Remover
@@ -132,7 +130,7 @@ const Basket = () => {
 
           <TouchableOpacity
             onPress={handleLoadingOrder}
-            className="rounded-lg bg-[#00CCbb] p-4"
+            className="rounded-lg bg-[#3ebd71] p-4"
           >
             <Text className="text-center text-white text-lg font-bold">
               Faça a sua encomenda

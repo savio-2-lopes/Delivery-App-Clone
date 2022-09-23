@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   Modal,
   Pressable,
+  ActivityIndicator,
 } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import {
@@ -16,13 +17,15 @@ import {
   CaretDown,
   Faders,
   MagnifyingGlass,
+  PlusCircle,
+  RadioButton,
   XCircle,
 } from "phosphor-react-native";
 import Categories from "../../components/Categories";
 import FeaturedRow from "../../components/FeaturedRow";
 import sanityClient from "../../sanity";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { RootStackParamList } from "../../App";
+import { RootStackParamList } from "../../Routes";
 
 type homeScreenProp = StackNavigationProp<RootStackParamList, "Login">;
 
@@ -45,10 +48,14 @@ interface FeaturedProps {
 }
 
 const Home = () => {
-  const navigation = useNavigation<homeScreenProp>();
-  const route = useRoute();
   const [featuredCategories, setFeaturedCategories] = useState([]);
   const [profile, setProfile] = useState({} as Profile);
+  const [loading, setLoading] = useState(false);
+  const [loadingFeatured, setLoadingFeatured] = useState(false);
+
+  const navigation = useNavigation<homeScreenProp>();
+  const route = useRoute();
+
   const { token } = route.params as Params;
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -62,6 +69,7 @@ const Home = () => {
     );
     const userInfo = await response.json();
     setProfile(userInfo);
+    setLoading(true);
   }
 
   useEffect(() => {
@@ -89,32 +97,35 @@ const Home = () => {
       )
       .then((data) => {
         setFeaturedCategories(data);
+        setLoadingFeatured(true);
       });
   }, []);
 
   return (
     <SafeAreaView className="bg-white">
-      {/* Header */}
-      <View className="flex-row mt-10 pb-3 items-center mx-4 space-x-2">
-        <Image
-          source={{ uri: "https://links.papareact.com/wru" }}
-          className="h-7 w-7 bg-gray-300 p-4 rounded-full"
-        />
+      <View className="flex-row mt-14 pb-3 items-center mx-4 space-x-2">
         <View className="flex-1">
-          <Text className="font-bold text-gray-400 text-xs">
-            Entrega rápida
-          </Text>
-          <Text className="font-bold text-xl">
-            Localização atual
-            <CaretDown size={20} color="#3ebd71" />
+          <Image
+            source={require("../../assets/icon.png")}
+            className="h-10 w-10 bg-gray-300 p-4 rounded-full"
+          />
+        </View>
+
+        <View className="flex-1">
+          <Text className="font-bold text-gray-600 text-xl">
+            Delivery Clone App
           </Text>
         </View>
 
         <TouchableOpacity onPress={() => setModalVisible(!false)}>
-          <Image
-            source={{ uri: profile.picture }}
-            className="h-[35px] w-[35px] bg-gray-300 p-4 rounded-full"
-          />
+          {loading ? (
+            <Image
+              source={{ uri: profile.picture }}
+              className="h-[35px] w-[35px] bg-gray-300 p-4 rounded-full"
+            />
+          ) : (
+            <ActivityIndicator size={50} color="#3ebd71" />
+          )}
         </TouchableOpacity>
       </View>
 
@@ -126,60 +137,66 @@ const Home = () => {
           setModalVisible(!modalVisible);
         }}
       >
-        <SafeAreaView className="flex">
-          <View className="mt-4 flex-row items-center justify-between px-4">
-            <Text className="font-bold text-lg">{profile.name}</Text>
-            <Pressable onPress={() => setModalVisible(!modalVisible)}>
-              <XCircle weight="fill" size={30} color="#3ebd71" />
-            </Pressable>
+        {loading ? (
+          <SafeAreaView className="flex">
+            <View className="mt-4 flex-row items-center justify-between px-4">
+              <Text className="font-bold text-lg">{profile.name}</Text>
+              <Pressable onPress={() => setModalVisible(!modalVisible)}>
+                <XCircle weight="fill" size={30} color="#3ebd71" />
+              </Pressable>
+            </View>
+
+            <Text className="text-xs text-gray-500 px-4">{profile.email}</Text>
+
+            <ScrollView className="divide-y divide-gray-200 mt-10">
+              <View className="flex justify-center items-center space-x-3 bg-white py-2 px-5">
+                <Image
+                  source={{ uri: profile.picture }}
+                  className="h-32 w-32 rounded-full"
+                />
+              </View>
+            </ScrollView>
+
+            <View className="p-5 bg-white mt-5 space-y-4">
+              <View className="flex-row justify-between">
+                <Text className="text-gray-400">E-mail: {profile.email}</Text>
+              </View>
+
+              <View className="flex-row justify-between mb-10">
+                <Text className="text-gray-400">
+                  Nome do Perfil: {profile.name}
+                </Text>
+              </View>
+
+              <TouchableOpacity
+                className="rounded-lg bg-[#3ebd71] p-4"
+                onPress={handleLogout}
+              >
+                <Text className="text-center text-white text-lg font-bold">
+                  Deslogar
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </SafeAreaView>
+        ) : (
+          <View className="flex align-items justify-center h-screen">
+            <ActivityIndicator size={50} color="#3ebd71" />
           </View>
-
-          <Text className="text-xs text-gray-500 px-4">{profile.email}</Text>
-
-          <ScrollView className="divide-y divide-gray-200 mt-10">
-            <View className="flex justify-center items-center space-x-3 bg-white py-2 px-5">
-              <Image
-                source={{ uri: profile.picture }}
-                className="h-32 w-32 rounded-full"
-              />
-            </View>
-          </ScrollView>
-
-          <View className="p-5 bg-white mt-5 space-y-4">
-            <View className="flex-row justify-between">
-              <Text className="text-gray-400">E-mail: {profile.email}</Text>
-            </View>
-
-            <View className="flex-row justify-between mb-10">
-              <Text className="text-gray-400">
-                Nome do Perfil: {profile.name}
-              </Text>
-            </View>
-
-            <TouchableOpacity
-              className="rounded-lg bg-[#3ebd71] p-4"
-              onPress={handleLogout}
-            >
-              <Text className="text-center text-white text-lg font-bold">
-                Deslogar
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </SafeAreaView>
+        )}
       </Modal>
 
-      {/* Search */}
+      {/* Pesquisa */}
 
-      <View className="flex-row items-center space-x-2 pb-2 mx-4">
+      <View className="flex-row items-center space-x-2 pb-2 mx-4 mt-5">
         <View className="flex-row flex-1 space-x-2 bg-gray-200 p-3">
           <MagnifyingGlass color="gray" size={20} />
           <TextInput
             className="rounded-2xl"
-            placeholder="Restaurants and cuisines"
+            placeholder="Restaurantes e cozinhas"
             keyboardType="default"
           />
         </View>
-        <Faders color="#3ebd71" />
+        <PlusCircle size={40} color="#3ebd71" />
       </View>
 
       {/* Conteúdo */}
@@ -192,7 +209,7 @@ const Home = () => {
       >
         <>
           <Categories />
-          {featuredCategories &&
+          {loadingFeatured ? (
             featuredCategories.map((category: FeaturedProps) => {
               return (
                 <FeaturedRow
@@ -203,7 +220,12 @@ const Home = () => {
                   description={category.short_description}
                 />
               );
-            })}
+            })
+          ) : (
+            <View className="w-screen h-screen items-center justify-center">
+              <ActivityIndicator size={100} color="#3ebd71" />
+            </View>
+          )}
         </>
       </ScrollView>
     </SafeAreaView>

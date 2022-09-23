@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { ScrollView, ActivityIndicator } from "react-native";
+import React, { useEffect, useState } from "react";
+import { ScrollView, ActivityIndicator, View } from "react-native";
 import CategoriesCard from "../CategoriesCard";
 import sanityClient from "../../sanity";
 import { urlFor } from "../../sanity";
@@ -12,7 +12,7 @@ interface CategoriesProps {
 
 const Categories = () => {
   const [categories, setCategories] = useState<CategoriesProps[]>([]);
-
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     sanityClient
       .fetch(
@@ -22,6 +22,7 @@ const Categories = () => {
       )
       .then((data) => {
         setCategories(data);
+        setLoading(true);
       });
   }, []);
 
@@ -32,18 +33,21 @@ const Categories = () => {
         paddingTop: 10,
       }}
       horizontal
+      className="mt-5 mb-5"
       showsHorizontalScrollIndicator={false}
     >
-      {categories ? (
+      {loading ? (
         categories.map((category: CategoriesProps) => (
           <CategoriesCard
             key={category._id}
             title={category.name}
-            bannerUrl={urlFor(category.image).width(200).url()}
+            bannerUrl={urlFor(category.image).width(250).url()}
           />
         ))
       ) : (
-        <ActivityIndicator size={50} color="#3ebd71" />
+        <View className="align-items w-screen justify-center">
+          <ActivityIndicator size={50} color="#3ebd71" />
+        </View>
       )}
     </ScrollView>
   );

@@ -32,6 +32,7 @@ interface RestaurantCardProps {
 
 const FeaturedRow = ({ id, token, title, description }: FeaturedProps) => {
   const [restaurants, setRestaurants] = useState<RestaurantCardProps[]>([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     sanityClient
@@ -52,13 +53,14 @@ const FeaturedRow = ({ id, token, title, description }: FeaturedProps) => {
       )
       .then((data: any) => {
         setRestaurants(data?.restaurants);
+        setLoading(true);
       });
   }, []);
 
   return (
     <SafeAreaView className="flex">
       <View className="mt-4 flex-row items-center justify-between px-4">
-        <Text className="font-bold text-lg">{title}</Text>
+        <Text className="font-bold text-gray-600 text-xl">{title}</Text>
         <ArrowRight color="#3ebd71" />
       </View>
 
@@ -70,9 +72,9 @@ const FeaturedRow = ({ id, token, title, description }: FeaturedProps) => {
           paddingHorizontal: 15,
         }}
         showsHorizontalScrollIndicator={false}
-        className="pt-4"
+        className="pt-4 "
       >
-        {restaurants ? (
+        {loading ? (
           restaurants.map((restaurant: RestaurantCardProps) => {
             return (
               <RestaurantCard
@@ -92,7 +94,9 @@ const FeaturedRow = ({ id, token, title, description }: FeaturedProps) => {
             );
           })
         ) : (
-          <ActivityIndicator size={50} color="#3ebd71" />
+          <View className="flex mt-5 mb-5 align-items w-screen justify-center">
+            <ActivityIndicator size={100} color="#3ebd71" />
+          </View>
         )}
       </ScrollView>
     </SafeAreaView>

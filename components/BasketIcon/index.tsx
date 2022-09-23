@@ -6,10 +6,10 @@ import { useSelector } from "react-redux";
 import {
   selectBasketItems,
   selectBasketTotal,
-} from "../../features/basketSlice";
+} from "../../store/basketSlice";
 import Currency from "react-currency-formatter";
-import { RootStackParamList } from "../../App";
 import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "../../Routes";
 
 type BasketScreenProp = StackNavigationProp<RootStackParamList, "Basket">;
 

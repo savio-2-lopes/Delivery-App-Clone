@@ -8,12 +8,12 @@ interface CategoryProps {
 
 const CategoriesCard = ({ bannerUrl, title }: CategoryProps) => {
   return (
-    <TouchableOpacity className="relative mr-2">
+    <TouchableOpacity className="relative mr-4">
       <Image
         source={{
           uri: bannerUrl,
         }}
-        className="h-20 w-20 rounded-lg"
+        className="h-28 w-28 rounded-xl"
       />
       <Text className="absolute bottom-1 left-1 text-white font-bold">
         {title}

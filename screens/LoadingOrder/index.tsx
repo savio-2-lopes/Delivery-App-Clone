@@ -3,8 +3,8 @@ import React, { useEffect } from "react";
 import { SafeAreaView } from "react-native";
 import * as Animatable from "react-native-animatable";
 import * as Progress from "react-native-progress";
-import { RootStackParamList } from "../../App";
 import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "../../Routes";
 
 type deliveryScreenProp = StackNavigationProp<RootStackParamList, "Delivery">;
 

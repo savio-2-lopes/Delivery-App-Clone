@@ -10,7 +10,7 @@ import React, { useEffect, useLayoutEffect } from "react";
 import { View, Image, Text, ScrollView, TouchableOpacity } from "react-native";
 import BasketIcon from "../../components/BasketIcon";
 import DishRow from "../../components/DishRow";
-import { setRestaurant } from "../../features/restaurantSlice";
+import { setRestaurant } from "../../store/restaurantSlice";
 import { urlFor } from "../../sanity";
 import { useDispatch } from "react-redux";
 

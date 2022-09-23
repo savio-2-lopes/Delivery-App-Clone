@@ -7,9 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addToBasket,
   removeFromBasket,
-  selectBasketItems,
   selectBasketItemsWithId,
-} from "../../features/basketSlice";
+} from "../../store/basketSlice";
 
 interface DishRow {
   id: string;
@@ -38,6 +37,8 @@ const DishRow = ({ id, token, name, description, price, image }: DishRow) => {
     );
   };
 
+  console.log(urlFor(image).url())
+
   const removeItemFromBasket = () => {
     if (!items.length > 0) return;
     dispatch(removeFromBasket({ id }));
@@ -53,11 +54,12 @@ const DishRow = ({ id, token, name, description, price, image }: DishRow) => {
       >
         <View className="flex-row">
           <View className="flex-1 pr-2">
-            <Text className="text-lg mb-1">{name}</Text>
+            <Text className="text-xl text-gray-600 mb-1">{name}</Text>
             <Text className="text-gray-400">{description}</Text>
             <Text className="text-gray-400 mt-2">
               <Currency quantity={Number(price)} currency="BRL" />
             </Text>
+            <Image source={{ uri: urlFor(image).url()}} />
           </View>
 
           <View>
@@ -66,6 +68,7 @@ const DishRow = ({ id, token, name, description, price, image }: DishRow) => {
                 borderWidth: 1,
                 borderColor: "#F3F3F4",
               }}
+              className="h-12 w-12 rounded-full"
               source={{ uri: urlFor(image).url() }}
             />
           </View>
